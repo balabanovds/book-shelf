@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import BooksList from '../views/BooksList.vue';
 import AuthorsList from '../views/AuthorsList.vue';
-import NewBook from '../views/NewBook.vue';
+import BookForm from '../views/BookForm.vue';
 
 Vue.use(VueRouter);
 
@@ -19,7 +19,7 @@ const routes = [
     {
         path: '/books/new',
         name: 'NewBook',
-        component: NewBook,
+        component: BookForm,
     },
     {
         path: '/authors',
