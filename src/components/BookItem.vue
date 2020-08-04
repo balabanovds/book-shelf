@@ -13,7 +13,7 @@
                         {{author | fullName}}
                     </span>
                 </p>
-                <p>ISBN: {{ book.ISBN }}</p>
+                <p>ISBN: {{ book.isbn }}</p>
                 <p>Category: {{book.category}}</p>
             </div>
             <div class="book__sell">
@@ -22,7 +22,7 @@
             </div>
         </div>
         <span class="material-icons book__delete"
-              @click="$emit('delete-book', book.ISBN)">
+              @click="$emit('delete-book', book.isbn)">
       delete
     </span>
     </div>

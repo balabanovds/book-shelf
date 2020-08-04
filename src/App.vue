@@ -5,7 +5,12 @@
             <router-link to="/authors">Authors</router-link>
         </div>
         <div class="container">
-            <router-view :books="books" :authors="authors" @del-book="onDelBook"/>
+            <router-view
+                    :books="books"
+                    :authors="authors"
+                    @del-book="onDelBook"
+                    @add-book="onAddBook"
+            />
         </div>
     </div>
 </template>
@@ -24,11 +29,20 @@
         authors.value = mockAuthors;
       });
 
-      const onDelBook = (id) => {
-        books.value = books.value.filter(b => b.ISBN !== id)
+      const onAddBook = (book) => {
+        books.value.push(book)
       }
 
-      return {books, authors, onDelBook};
+      const onDelBook = (id) => {
+        books.value = books.value.filter(b => b.isbn !== id)
+      }
+
+      return {
+        books,
+        authors,
+        onDelBook,
+        onAddBook
+      };
     },
   };
 </script>
@@ -70,4 +84,24 @@
             }
         }
     }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 32px;
+        background-color: green;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: white;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #468f59;
+        }
+
+        &.disabled {
+            background-color: darkgray;
+        }
+    }
+
 </style>

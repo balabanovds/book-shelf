@@ -23,7 +23,7 @@
       ErrorSpan
     },
     props: {
-      value: String,
+      value: [String, Number, Array],
       name: {
         type: String,
         default: 'define_me!'
@@ -45,7 +45,7 @@
 
       const onValidate = () => {
         valid.value = errors.value.length === 0
-        emit('is-valid', valid.value)
+        emit('is-valid', props.name, valid.value)
       }
 
       const error = computed(() => {
@@ -73,6 +73,7 @@
     }
 
     input {
+        font-size: 1.5rem;
         width: 100%;
         padding: 10px 20px;
         outline: none;

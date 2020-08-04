@@ -4,7 +4,7 @@
         <div class="books">
             <BookItem
                     v-for="book in filteredBooks"
-                    :key="book.ISBN"
+                    :key="book.isbn"
                     :book="book"
                     :authors="getAuthors(book)"
                     @delete-book="onDelete"
@@ -38,13 +38,13 @@
       );
 
       const onSearch = (value) => (search.value = value);
-      const onDelete = (ISBN) => {
-        emit('del-book', ISBN)
+      const onDelete = (isbn) => {
+        emit('del-book', isbn)
       };
 
-      const getAuthors = ({ISBN}) => {
+      const getAuthors = ({isbn}) => {
         return props.authors.filter((a) =>
-          a.booksISBNs.some((val) => val === ISBN)
+          a.booksISBNs.some((val) => val === isbn)
         );
       };
 

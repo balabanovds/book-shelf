@@ -4,7 +4,7 @@
         <div class="books">
             <BookItem
                     v-for="book in filteredBooks"
-                    :key="book.ISBN"
+                    :key="book.isbn"
                     :book="book"
                     :authors="getAuthors(book)"
             ></BookItem>
@@ -34,9 +34,9 @@
         })
       );
 
-      const getAuthors = ({ISBN}) => {
+      const getAuthors = ({isbn}) => {
         return state.authors.filter((a) =>
-          a.booksISBNs.some((val) => val === ISBN)
+          a.booksISBNs.some((val) => val === isbn)
         );
       };
 

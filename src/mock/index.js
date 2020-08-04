@@ -1,6 +1,6 @@
 export const mockBooks = [
     {
-        ISBN: '9780134190440',
+        isbn: '9780134190440',
         title: 'The Go Programming Language',
         promo:
             'The book features hundreds of interesting and practical examples of well-written Go code that cover the whole language',
@@ -12,7 +12,7 @@ export const mockBooks = [
         category: 'programming',
     },
     {
-        ISBN: '9780133086225',
+        isbn: '9780133086225',
         title: 'C Programming Language',
         promo:
             'One of the best-selling programming books published in the last fifty years',
