@@ -4,8 +4,6 @@ import ListHeader from './components/ListHeader.vue';
 import router from './router';
 import VueCompositionAPI from '@vue/composition-api';
 
-Vue.prototype.$bus = new Vue();
-
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 Vue.component('ListHeader', ListHeader);

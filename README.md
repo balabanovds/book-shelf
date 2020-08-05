@@ -1,5 +1,7 @@
 # b00k-sh3lf
 
+## Example available at [github pages](https://balabanovds.github.io/book-shelf/)
+
 ## Project setup
 ```
 yarn install
