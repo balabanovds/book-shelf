@@ -10,16 +10,17 @@
                     :authors="authors"
                     @del-book="onDelBook"
                     @add-book="onAddBook"
+                    @add-author="onAddAuthor"
             />
         </div>
     </div>
 </template>
 
 <script>
-  import {onMounted, ref} from "@vue/composition-api";
+  import {defineComponent, onMounted, ref} from "@vue/composition-api";
   import {mockAuthors, mockBooks} from "./mock";
 
-  export default {
+  export default defineComponent({
     setup() {
       const books = ref([])
       const authors = ref([])
@@ -33,6 +34,11 @@
         books.value.push(book)
       }
 
+      const onAddAuthor = (author) => {
+        author.id = authors.value.length + 1
+        authors.value.push(author)
+      }
+
       const onDelBook = (id) => {
         books.value = books.value.filter(b => b.isbn !== id)
       }
@@ -41,10 +47,11 @@
         books,
         authors,
         onDelBook,
-        onAddBook
+        onAddBook,
+        onAddAuthor
       };
     },
-  };
+  });
 </script>
 
 <style lang="scss">
@@ -82,6 +89,17 @@
             &.router-link-exact-active {
                 color: #42b983;
             }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        list-style-position: outside;
+
+        & > * {
+            margin-left: 15px;
         }
     }
 

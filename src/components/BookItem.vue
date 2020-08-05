@@ -5,14 +5,13 @@
             <img :src="book.url" alt="pic"/>
             <div class="book__text">
                 <p>Year: {{book.year}}</p>
-                <p>
+                <ul>
                     Authors:
-                    <span class="book__author"
-                          v-for="author in authors"
-                          :key="author.id">
+                    <li v-for="author in authors"
+                        :key="author.id">
                         {{author | fullName}}
-                    </span>
-                </p>
+                    </li>
+                </ul>
                 <p>ISBN: {{ book.isbn }}</p>
                 <p>Category: {{book.category}}</p>
             </div>

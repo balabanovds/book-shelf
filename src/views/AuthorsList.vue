@@ -1,53 +1,51 @@
 <template>
     <div>
-        <input class="search" type="text" placeholder="search" v-model="search"/>
-        <div class="books">
-            <BookItem
-                    v-for="book in filteredBooks"
-                    :key="book.isbn"
-                    :book="book"
-                    :authors="getAuthors(book)"
-            ></BookItem>
-        </div>
+        <ListHeader buttonText="Add author" @on-search="onSearch" toUrl="/authors/new"/>
+        <AuthorItem
+                v-for="author in filteredAuthors"
+                :key="author.id"
+                :author="author"
+                :books="getBooks(author)"
+        ></AuthorItem>
     </div>
 </template>
 
 <script>
-  import BookItem from "../components/BookItem.vue";
-  import fetchAll from "../traits/fetchAll";
+  import AuthorItem from "../components/AuthorItem";
   import {computed, ref} from "@vue/composition-api";
 
   export default {
-    setup() {
-      const {state} = fetchAll();
-
+    props: {
+      books: Array,
+      authors: Array,
+    },
+    setup({authors, books}) {
       const search = ref("");
 
-      const filteredBooks = computed(() =>
-        state.books.filter((b) => {
+      const filteredAuthors = computed(() =>
+        authors.filter((a) => {
+          const srch = search.value.toLowerCase()
           return (
-            b.title.includes(search.value) ||
-            b.year.toString().includes(search.value) ||
-            b.price.toString().includes(search.value) ||
-            b.category.includes(search.value)
+            a.firstName.toLowerCase().includes(srch) ||
+            a.lastName.toLowerCase().includes(srch) ||
+            a.country.toLowerCase().includes(srch)
           );
         })
       );
 
-      const getAuthors = ({isbn}) => {
-        return state.authors.filter((a) =>
-          a.booksISBNs.some((val) => val === isbn)
-        );
-      };
+      const onSearch = (value) => (search.value = value);
+      const getBooks = (author) => {
+        return author.booksISBNs.flatMap(i => books.filter(b => b.isbn === i))
+      }
 
       return {
-        getAuthors,
-        search,
-        filteredBooks,
-      };
+        getBooks,
+        onSearch,
+        filteredAuthors
+      }
     },
     components: {
-      BookItem,
+      AuthorItem,
     },
   };
 </script>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import BooksList from '../views/BooksList.vue';
 import AuthorsList from '../views/AuthorsList.vue';
 import BookForm from '../views/BookForm.vue';
+import AuthorForm from "../views/AuthorForm";
 
 Vue.use(VueRouter);
 
@@ -23,8 +24,13 @@ const routes = [
     },
     {
         path: '/authors',
-        name: 'About',
+        name: 'Authors',
         component: AuthorsList,
+    },
+    {
+        path: '/authors/new',
+        name: 'NewAuthor',
+        component: AuthorForm,
     },
 ];
 

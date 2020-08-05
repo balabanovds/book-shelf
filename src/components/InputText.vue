@@ -2,7 +2,7 @@
     <div>
         <label :for="name"> {{label}} </label>
         <input :class="{error: !valid}"
-               type="text"
+               :type="type"
                :id="name"
                :name="name"
                v-model="input"
@@ -24,6 +24,10 @@
     },
     props: {
       value: [String, Number, Array],
+      type: {
+        type: String,
+        default: 'text'
+      },
       name: {
         type: String,
         default: 'define_me!'
