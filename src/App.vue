@@ -5,53 +5,18 @@
             <router-link to="/authors">Authors</router-link>
         </div>
         <div class="container">
-            <router-view
-                    :books="books"
-                    :authors="authors"
-                    @del-book="onDelBook"
-                    @add-book="onAddBook"
-                    @add-author="onAddAuthor"
-            />
+            <router-view/>
         </div>
     </div>
 </template>
 
 <script>
-  import {defineComponent, onMounted, ref} from "@vue/composition-api";
-  import {mockAuthors, mockBooks} from "./mock";
-
-  export default defineComponent({
-    setup() {
-      const books = ref([])
-      const authors = ref([])
-
-      onMounted(() => {
-        books.value = mockBooks;
-        authors.value = mockAuthors;
-      });
-
-      const onAddBook = (book) => {
-        books.value.push(book)
-      }
-
-      const onAddAuthor = (author) => {
-        author.id = authors.value.length + 1
-        authors.value.push(author)
-      }
-
-      const onDelBook = (id) => {
-        books.value = books.value.filter(b => b.isbn !== id)
-      }
-
-      return {
-        books,
-        authors,
-        onDelBook,
-        onAddBook,
-        onAddAuthor
-      };
+  export default {
+    created() {
+      this.$store.dispatch('authors/fetchAll')
+      this.$store.dispatch('books/fetchAll')
     },
-  });
+  };
 </script>
 
 <style lang="scss">

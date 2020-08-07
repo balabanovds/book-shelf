@@ -17,22 +17,11 @@
             <div class="row">
                 <InputText
                         type="date"
-                        v-model="dateStr"
+                        v-model="author.birthday"
                         name="birthday"
                         :validators="[validators.notEmpty()]"
                         @is-valid="validateForm"
                 />
-<!--                <div class="birthday">-->
-<!--                    <label for="birthday">-->
-<!--                        <span>Birthday:</span>-->
-<!--                    </label>-->
-<!--                    <input-->
-<!--                            class="birthday__picker"-->
-<!--                            id="birthday"-->
-<!--                            type="date"-->
-<!--                            v-model="dateStr"-->
-<!--                    />-->
-<!--                </div>-->
                 <InputText
                         v-model="author.country"
                         name="country"
@@ -53,10 +42,10 @@
                 <label for="books">
                     <span>Books:</span>
                 </label>
-                <select id="books" v-model="author.booksISBNs" multiple>
+                <select id="books" v-model="author.books" multiple>
                     <option class="book-select__item" v-for="book in books"
-                            :value="book.isbn"
-                            :key="book.isbn">
+                            :value="book.id"
+                            :key="book.id">
                         {{book.title}}
                     </option>
                 </select>
@@ -76,11 +65,12 @@
 
 <script>
   import InputText from "../components/InputText.vue";
-  import {computed, reactive, ref} from '@vue/composition-api'
+  import {computed, reactive} from '@vue/composition-api'
   import {isNumber, len, minLen, notEmpty} from "../utils/validators";
+  import store from "../store";
 
   export default {
-    name: 'BookForm',
+    name: 'AuthorForm',
     props: {
       books: Array,
     },
@@ -94,18 +84,16 @@
         }
       }
     },
-    setup(props, {emit, parent}) {
+    setup(props, {parent}) {
       const router = parent.$router
-
-      const dateStr = ref('')
 
       const author = reactive({
         firstName: '',
         lastName: '',
-        birthday: new Date(),
+        birthday: '',
         country: '',
         gender: 'male',
-        booksISBNs: [],
+        books: [],
       })
 
       const validFields = reactive({
@@ -116,8 +104,7 @@
       })
 
       const onSubmit = () => {
-        author.birthday = new Date(dateStr.value)
-        emit('add-author', author)
+        store.dispatch('authors/create', author)
         router.push({name: 'Authors'})
       }
 
@@ -131,7 +118,6 @@
 
       return {
         author,
-        dateStr,
         onSubmit,
         validateForm,
         valid
@@ -148,12 +134,6 @@
         font-size: 1.2rem;
     }
 
-    /*input, select {*/
-    /*    padding: 0.75em 0.5em;*/
-    /*    font-size: 100%;*/
-    /*    border: 1px solid #ccc;*/
-    /*    width: 100%;*/
-    /*}*/
     .row {
         display: flex;
 

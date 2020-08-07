@@ -84,6 +84,7 @@
   import InputText from "../components/InputText.vue";
   import {reactive, computed} from '@vue/composition-api'
   import {isNumber, len, minLen, notEmpty} from "../utils/validators";
+  import store from "../store";
 
   export default {
     name: 'BookForm',
@@ -97,7 +98,7 @@
         }
       }
     },
-    setup(props, {emit, parent}) {
+    setup(props, {parent}) {
       const router = parent.$router
 
       const book = reactive({
@@ -121,7 +122,7 @@
       })
 
       const onSubmit = () => {
-        emit('add-book', book)
+        store.dispatch('books/create', book)
         router.push({name: 'Books'})
       }
 

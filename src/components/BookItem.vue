@@ -7,31 +7,40 @@
                 <p>Year: {{book.year}}</p>
                 <ul>
                     Authors:
-                    <li v-for="author in authors"
+                    <li v-for="author in authors(book)"
                         :key="author.id">
-                        {{author | fullName}}
+                        {{ author | fullName }}
                     </li>
                 </ul>
                 <p>ISBN: {{ book.isbn }}</p>
-                <p>Category: {{book.category}}</p>
+                <p>Category: {{ book.category }}</p>
             </div>
             <div class="book__sell">
                 <div class="book__promo">{{ book.promo }}</div>
-                <div class="book__price">{{book.price | formatPrice}}</div>
+                <div class="book__price">{{ book.price | formatPrice }}</div>
             </div>
         </div>
         <span class="material-icons book__delete"
-              @click="$emit('delete-book', book.isbn)">
-      delete
-    </span>
+              @click="deleteBook(book.id)">
+            delete
+        </span>
     </div>
 </template>
 
 <script>
+  import {mapActions, mapGetters} from 'vuex';
+
   export default {
     props: {
       book: Object,
-      authors: Array,
+    },
+    computed: {
+      ...mapGetters('books', {
+        authors: "getAuthors"
+      })
+    },
+    methods: {
+      ...mapActions('books', {deleteBook: "delete"})
     },
     filters: {
       fullName(author) {
