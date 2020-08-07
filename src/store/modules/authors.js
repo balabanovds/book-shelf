@@ -1,3 +1,5 @@
+import {HOST, PORT} from '../../main'
+
 const state = {
   authors: []
 }
@@ -31,23 +33,31 @@ const mutations = {
 
 const actions = {
   async create({commit}, payload) {
-    const response = await fetch("http://176.58.113.185:8001/authors", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    })
-    const json = await response.json()
+    let json = ''
+    try {
+      const response = await fetch(`http://${HOST}:${PORT}/authors`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      json = await response.json()
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error(e)
+      return
+    }
     commit('addAuthor', json)
   },
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch("http://176.58.113.185:8001/authors")
+      const response = await fetch(`http://${HOST}:${PORT}/authors`)
       const json = await response.json()
       commit('setAuthors', json)
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e)
     }
   }

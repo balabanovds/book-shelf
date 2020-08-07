@@ -7,6 +7,9 @@ import VueCompositionAPI from '@vue/composition-api';
 
 Vue.config.productionTip = false;
 
+export const HOST = process.env.VUE_APP_HOST
+export const PORT = process.env.VUE_APP_PORT
+
 Vue.use(VueCompositionAPI);
 Vue.component('ListHeader', ListHeader);
 

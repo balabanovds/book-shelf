@@ -1,3 +1,5 @@
+import {HOST, PORT} from '../../main'
+
 const state = {
   books: []
 }
@@ -16,7 +18,6 @@ const getters = {
   },
 
   getAuthors: (state, getters, rootState) => book => {
-    console.log(book)
     return rootState.authors.authors.filter((a) =>
       a.books.some((val) => val === book.id)
     );
@@ -39,27 +40,31 @@ const mutations = {
 
 const actions = {
   async create({commit}, payload) {
+    let json = ''
     try {
-      const response = await fetch("http://176.58.113.185:8001/books", {
+      const response = await fetch(`http://${HOST}:${PORT}/books`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
       })
-      const json = await response.json()
-      commit('addBook', json)
+      json = await response.json()
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e)
+      return
     }
+    commit('addBook', json)
   },
 
   async delete({commit}, id) {
     try {
-      await fetch(`http://176.58.113.185:8001/books/${id}`, {
+      await fetch(`http://${HOST}:${PORT}/books/${id}`, {
         method: "DELETE",
       })
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e)
       return
     }
@@ -68,10 +73,11 @@ const actions = {
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch("http://176.58.113.185:8001/books")
+      const response = await fetch(`http://${HOST}:${PORT}/books`)
       const json = await response.json()
       commit('setBooks', json)
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e)
     }
   }
