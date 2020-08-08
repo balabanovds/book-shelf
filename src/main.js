@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 const ADDR = process.env.VUE_APP_ADDR
 const PROTO = process.env.VUE_APP_PROTO
 
-export const BASE_URL = `${PROTO}://${ADDR}`
+export const FULL_BASE_URL = `${PROTO}://${ADDR}`
 
 Vue.use(VueCompositionAPI);
 Vue.component('ListHeader', ListHeader);

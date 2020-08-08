@@ -1,4 +1,4 @@
-import {BASE_URL} from '../../main'
+import {FULL_BASE_URL} from '../../main'
 
 const state = {
   authors: []
@@ -35,7 +35,7 @@ const actions = {
   async create({commit}, payload) {
     let json = ''
     try {
-      const response = await fetch(`${BASE_URL}/authors`, {
+      const response = await fetch(`${FULL_BASE_URL}/authors`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const actions = {
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch(`${BASE_URL}/authors`, {
+      const response = await fetch(`${FULL_BASE_URL}/authors`, {
         headers: {
         }
       })

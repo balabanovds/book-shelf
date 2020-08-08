@@ -1,4 +1,4 @@
-import {BASE_URL} from '../../main'
+import {FULL_BASE_URL} from '../../main'
 
 const state = {
   books: []
@@ -42,7 +42,7 @@ const actions = {
   async create({commit}, payload) {
     let json = ''
     try {
-      const response = await fetch(`${BASE_URL}/books`, {
+      const response = await fetch(`${FULL_BASE_URL}/books`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const actions = {
 
   async delete({commit}, id) {
     try {
-      await fetch(`${BASE_URL}/books/${id}`, {
+      await fetch(`${FULL_BASE_URL}/books/${id}`, {
         method: "DELETE",
         headers: {
         }
@@ -75,7 +75,7 @@ const actions = {
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch(`${BASE_URL}/books`, {
+      const response = await fetch(`${FULL_BASE_URL}/books`, {
         headers: {
         }
       })
