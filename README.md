@@ -1,6 +1,6 @@
 # b00k-sh3lf
 
-## Example available at [github pages](https://balabanovds.github.io/book-shelf/)
+## Example available at [demo page](https://web-coder.dev/demo/book-shelf)
 
 ## Project setup
 ```

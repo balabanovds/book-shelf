@@ -1,4 +1,4 @@
-import {HOST, PORT} from '../../main'
+import {BASE_URL} from '../../main'
 
 const state = {
   authors: []
@@ -35,10 +35,10 @@ const actions = {
   async create({commit}, payload) {
     let json = ''
     try {
-      const response = await fetch(`http://${HOST}:${PORT}/authors`, {
+      const response = await fetch(`${BASE_URL}/authors`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload)
       })
@@ -53,7 +53,10 @@ const actions = {
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch(`http://${HOST}:${PORT}/authors`)
+      const response = await fetch(`${BASE_URL}/authors`, {
+        headers: {
+        }
+      })
       const json = await response.json()
       commit('setAuthors', json)
     } catch (e) {

@@ -1,4 +1,4 @@
-import {HOST, PORT} from '../../main'
+import {BASE_URL} from '../../main'
 
 const state = {
   books: []
@@ -42,10 +42,10 @@ const actions = {
   async create({commit}, payload) {
     let json = ''
     try {
-      const response = await fetch(`http://${HOST}:${PORT}/books`, {
+      const response = await fetch(`${BASE_URL}/books`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload)
       })
@@ -60,8 +60,10 @@ const actions = {
 
   async delete({commit}, id) {
     try {
-      await fetch(`http://${HOST}:${PORT}/books/${id}`, {
+      await fetch(`${BASE_URL}/books/${id}`, {
         method: "DELETE",
+        headers: {
+        }
       })
     } catch (e) {
       // eslint-disable-next-line
@@ -73,7 +75,10 @@ const actions = {
 
   async fetchAll({commit}) {
     try {
-      const response = await fetch(`http://${HOST}:${PORT}/books`)
+      const response = await fetch(`${BASE_URL}/books`, {
+        headers: {
+        }
+      })
       const json = await response.json()
       commit('setBooks', json)
     } catch (e) {
