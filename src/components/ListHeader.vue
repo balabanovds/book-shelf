@@ -3,12 +3,14 @@
         <input class="search" type="text"
                placeholder="search"
                v-model="search"
-               @keyup="$emit('on-search', search)"/>
+               @keyup="setSearch(search)"
+        />
         <router-link class="add-new" :to="toUrl">{{buttonText}}</router-link>
     </div>
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
   export default {
     props: {
       buttonText: {
@@ -25,6 +27,9 @@
         search: "",
       };
     },
+    methods: {
+      ...mapMutations(['setSearch']),
+    }
   };
 </script>
 

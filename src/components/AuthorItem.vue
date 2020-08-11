@@ -8,19 +8,23 @@
         </div>
         <ul class="author__books">
             Books:
-            <li v-for="book in books" :key="book.isbn">{{book.title}}</li>
+            <li v-for="book in books(author)" :key="book.id">{{book.title}}</li>
         </ul>
     </div>
 </template>
 
 <script>
-
+  import {mapGetters} from 'vuex'
   import moment from "moment";
 
   export default {
     props: {
       author: Object,
-      books: Array,
+    },
+    computed: {
+      ...mapGetters('authors', {
+        books: 'getBooks'
+      })
     },
     filters: {
       fullName(author) {

@@ -23,3 +23,5 @@ git commit -m 'deploy'
  git push -f git@github.com:balabanovds/book-shelf.git master:gh-pages
 
 cd -
+
+echo All done. Available at https://balabanovds.github.io/book-shelf
