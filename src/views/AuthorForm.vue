@@ -3,13 +3,13 @@
         <h1>New author</h1>
         <form novalidate @submit.prevent="onSubmit">
             <InputText
-                    v-model="author.firstName"
+                    @input="author.firstName = $event"
                     name="firstName"
                     :validators="[validators.notEmpty()]"
                     @is-valid="validateForm"
             />
             <InputText
-                    v-model="author.lastName"
+                    @input="author.lastName = $event"
                     name="lastName"
                     :validators="[validators.notEmpty()]"
                     @is-valid="validateForm"
@@ -17,13 +17,13 @@
             <div class="row">
                 <InputText
                         type="date"
-                        v-model="author.birthday"
+                        @input="author.birthday = $event"
                         name="birthday"
                         :validators="[validators.notEmpty()]"
                         @is-valid="validateForm"
                 />
                 <InputText
-                        v-model="author.country"
+                        @input="author.country = $event"
                         name="country"
                         :validators="[validators.notEmpty()]"
                         @is-valid="validateForm"
@@ -66,14 +66,12 @@
 <script>
   import InputText from "../components/InputText.vue";
   import {computed, reactive} from '@vue/composition-api'
-  import {isNumber, len, minLen, notEmpty} from "../utils/validators";
+  import {isNumber, len, minLen, notEmpty} from "@/utils/validators";
   import store from "../store";
+  import {mapState} from 'vuex';
 
   export default {
     name: 'AuthorForm',
-    props: {
-      books: Array,
-    },
     data() {
       return {
         validators: {
@@ -83,6 +81,9 @@
           notEmpty
         }
       }
+    },
+    computed: {
+      ...mapState('books', ['books'])
     },
     setup(props, {parent}) {
       const router = parent.$router

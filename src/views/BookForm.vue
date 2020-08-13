@@ -4,14 +4,14 @@
     <form novalidate @submit.prevent="onSubmit">
       <InputText
           class="book__title"
-          v-model="book.title"
+          @input="book.title = $event"
           name="title"
           :validators="[validators.notEmpty()]"
           @is-valid="validateField"
       />
       <InputText
           class="book__promo"
-          v-model="book.promo"
+          @input="book.promo = $event"
           name="promo"
           :validators="[validators.notEmpty()]"
           @is-valid="validateField"
@@ -19,7 +19,7 @@
       <div class="row">
         <InputText
             class="book__isbn"
-            v-model="book.isbn"
+            @input="book.isbn = $event"
             name="ISBN"
             :validators="[
                       validators.notEmpty(),
@@ -30,7 +30,7 @@
         />
         <InputText
             class="book__year"
-            v-model="book.year"
+            @input="book.year = $event"
             name="year"
             :validators="[
                       validators.notEmpty(),
@@ -41,7 +41,7 @@
         />
         <InputText
             class="book__price"
-            v-model="book.price"
+            @input="book.price = $event"
             name="price"
             :validators="[
                       validators.notEmpty(),
@@ -53,7 +53,7 @@
       </div>
       <InputText
           class="book__category"
-          v-model="book.category"
+          @input="book.category = $event"
           name="category"
           :validators="[validators.notEmpty()]"
           @is-valid="validateField"
@@ -61,14 +61,14 @@
       <div class="row">
         <InputText
             class="book__tags"
-            v-model="book.tags"
+            @input="book.tags = $event"
             name="tags"
             :validators="[validators.notEmpty()]"
             @is-valid="validateField"
         />
         <InputText
             class="book__src"
-            v-model="book.url"
+            @input="book.url = $event"
             name="URL"
             :validators="[validators.notEmpty()]"
             @is-valid="validateField"
