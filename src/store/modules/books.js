@@ -1,4 +1,4 @@
-import {FULL_BASE_URL} from '../../main'
+import {FULL_BASE_URL} from '@/main'
 
 const state = {
   books: []

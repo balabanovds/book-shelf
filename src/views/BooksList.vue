@@ -16,9 +16,6 @@
   import {mapGetters} from 'vuex';
 
   export default {
-    props: {
-      authors: Array,
-    },
     computed: {
       ...mapGetters('books', ["filteredBySearch"])
     },

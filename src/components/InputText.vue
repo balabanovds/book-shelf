@@ -13,8 +13,8 @@
 
 <script>
   import {computed, ref} from '@vue/composition-api'
-  import {capitalize} from "../utils/strings";
-  import inputValidator from "../traits/inputValidator";
+  import {capitalize} from "@/utils/strings";
+  import inputValidator from "@/traits/inputValidator";
   import ErrorSpan from "./ErrorSpan";
 
   export default {
