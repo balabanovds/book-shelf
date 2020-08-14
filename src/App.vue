@@ -8,6 +8,9 @@
     <div class="container">
       <router-view/>
     </div>
+    <div class="footer">
+      <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+    </div>
   </div>
 </template>
 
@@ -99,6 +102,16 @@ ul {
 
   &.disabled {
     background-color: darkgray;
+  }
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+
+  & a {
+    text-decoration: none;
+    color: #2c3e50;
   }
 }
 
