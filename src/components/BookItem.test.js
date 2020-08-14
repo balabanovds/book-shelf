@@ -11,6 +11,11 @@ const actions = {
 }
 
 const store = new Vuex.Store({
+  getters: {
+    formatPrice:() => (value) => {
+      return '$ ' + parseFloat((value / 100).toFixed(2))
+    }
+  },
   modules: {
     books: {
       namespaced: true,
