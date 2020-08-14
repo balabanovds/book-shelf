@@ -1,9 +1,9 @@
 const webpack = require('webpack')
 
+const publicPath = process.env.PUBLIC_PATH || '/'
+
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/demo/book-shelf/'
-    : '/',
+  publicPath,
   configureWebpack: {
     plugins: [
       new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru|en/)

@@ -13,18 +13,18 @@
 
 <script>
   import BookItem from "../components/BookItem.vue";
-  import {mapGetters} from 'vuex';
+  import {mapGetters, } from 'vuex';
 
   export default {
-    props: {
-      authors: Array,
-    },
     computed: {
       ...mapGetters('books', ["filteredBySearch"])
     },
     components: {
       BookItem,
     },
+    created() {
+      this.$store.dispatch('fetchRates')
+    }
   };
 </script>
 

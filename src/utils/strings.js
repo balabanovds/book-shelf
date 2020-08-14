@@ -3,7 +3,6 @@ const capitalize = (string) => {
 }
 
 
-
 export {
   capitalize,
 }

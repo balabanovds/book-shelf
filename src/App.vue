@@ -1,90 +1,118 @@
 <template>
-    <div id="app">
-        <div id="nav">
-            <router-link to="/books">Books</router-link>
-            <router-link to="/authors">Authors</router-link>
-        </div>
-        <div class="container">
-            <router-view/>
-        </div>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/books">Books</router-link>
+      <router-link to="/authors">Authors</router-link>
+      <CurrencySwitch class="currency-switch"/>
     </div>
+    <div class="container">
+      <router-view/>
+    </div>
+    <div class="footer">
+      <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+    </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    created() {
-      this.$store.dispatch('authors/fetchAll')
-      this.$store.dispatch('books/fetchAll')
-    },
-  };
+import CurrencySwitch from '@/components/CurrencySwitch';
+
+export default {
+  created() {
+    this.$store.dispatch('authors/fetchAll');
+    this.$store.dispatch('books/fetchAll');
+  },
+  components: {
+    CurrencySwitch
+  }
+};
 </script>
 
 <style lang="scss">
-    * {
-        box-sizing: border-box;
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.container {
+  width: 75vw;
+  margin: 0 auto;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: #2c3e50;
+}
+
+#nav {
+  position: relative;
+  padding: 30px;
+  text-align: center;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0 10px;
+
+    &.router-link-exact-active {
+      color: #42b983;
     }
+  }
+}
 
-    p {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-position: outside;
 
-    .container {
-        width: 75vw;
-        margin: 0 auto;
-    }
+  & > * {
+    margin-left: 15px;
+  }
+}
 
-    #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+.currency-switch {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-        color: #2c3e50;
-    }
+.btn {
+  display: inline-block;
+  padding: 10px 32px;
+  background-color: green;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
 
-    #nav {
-        padding: 30px;
-        text-align: center;
+  &:hover {
+    cursor: pointer;
+    background-color: #468f59;
+  }
 
-        a {
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 0 10px;
+  &.disabled {
+    background-color: darkgray;
+  }
+}
 
-            &.router-link-exact-active {
-                color: #42b983;
-            }
-        }
-    }
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        list-style-position: outside;
-
-        & > * {
-            margin-left: 15px;
-        }
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 10px 32px;
-        background-color: green;
-        text-align: center;
-        text-decoration: none;
-        font-size: 1.5rem;
-        color: white;
-
-        &:hover {
-            cursor: pointer;
-            background-color: #468f59;
-        }
-
-        &.disabled {
-            background-color: darkgray;
-        }
-    }
+  & a {
+    text-decoration: none;
+    color: #2c3e50;
+  }
+}
 
 </style>
